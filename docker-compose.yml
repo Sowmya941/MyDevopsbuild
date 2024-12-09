@@ -1,14 +1,7 @@
-version: '3.8'
-
-services:
-  react-app:
-    build: .
-    ports:
-      - "80:80"
-    container_name: react-app
-    networks:
-      - react-network
-
-networks:
-  react-network:
-    driver: bridge
+version: '3' 
+services: 
+   mydeployment: 
+     image: "sowmyadevop/dev:mydeployment" 
+     container_name: "myreactapp" 
+     ports: 
+        -"80:80"
