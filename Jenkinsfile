@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('deploy') {
+        stage ('deploy') {
             steps {
                 sh 'chmod +x deploy.sh'
             }
