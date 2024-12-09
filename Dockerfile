@@ -1,29 +1,26 @@
-# Step 1: Use Node.js as the base image
-FROM node:16-alpine as build
+# Step 1: Build the React application using Node.js
+FROM node:16-alpine AS build
 
-# Step 2: Set the working directory inside the container
 WORKDIR /app
 
-# Step 3: Copy the package.json and package-lock.json (if available)
+# Copy package files and install dependencies
 COPY package*.json ./
-
-# Step 4: Install the dependencies
 RUN npm install
 
-# Step 5: Copy the rest of the application
-COPY . .
+# Copy the source code and build the React app
+COPY . ./
 
-# Step 6: Build the React application for production
+# Run the build to create the production-ready files in the `build/` folder
 RUN npm run build
 
-# Step 7: Use Nginx to serve the application
+# Step 2: Use Nginx to serve the React app
 FROM nginx:alpine
 
-# Step 8: Copy the build files from the previous stage to Nginx
+# Copy the build output to Nginx's html directory (where static files are served)
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Step 9: Expose port 80 for the container
+# Expose port 80
 EXPOSE 80
 
-# Step 10: Start the Nginx server to serve the React app
+# Start Nginx to serve the app
 CMD ["nginx", "-g", "daemon off;"]
