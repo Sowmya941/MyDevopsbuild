@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [ $GIT_BRANCH = "dev" ]; then
 sh 'chmod +x build.sh'
 sh './build.sh'
