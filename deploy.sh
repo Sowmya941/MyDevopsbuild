@@ -1,4 +1,5 @@
 #!/bin/bash
+docker login -u sowmyadevop -p dckr_pat_7PN2WliApoSTDmCzMKzSPma_-GU
 
 if [ $GIT_BRANCH = "dev" ]; then
 sh 'chmod +x build.sh'
